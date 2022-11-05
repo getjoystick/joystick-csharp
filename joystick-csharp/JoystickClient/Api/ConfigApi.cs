@@ -1,47 +1,52 @@
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using JoystickClient.Client;
 using JoystickClient.Interfaces;
 using JoystickClient.Models;
 
-namespace JoystickClient.Api;
-
-internal sealed class ConfigApi : ApiBase, IConfigApi
+namespace JoystickClient.Api
 {
-    private const string getConfigPath = "/config/{contentId}";
 
-    public ConfigApi(IJoystickApiHttpClient httpClient) : base(httpClient)
+    internal sealed class ConfigApi : ApiBase, IConfigApi
     {
-    }
+        private const string getConfigPath = "/config/{contentId}";
 
-    public async Task<string> GetConfigAsync(string contentId, CancellationToken token = default)
-    {
-        ConfigValidate(contentId);
+        public ConfigApi(IJoystickApiHttpClient httpClient) : base(httpClient)
+        {
+        }
 
-        var pathParams = new List<(string, string)> { ("contentId", contentId) };
+        public async Task<string> GetConfigAsync(string contentId, CancellationToken token = default)
+        {
+            ConfigValidate(contentId);
 
-        var request = CreateRequest(getConfigPath, HttpMethod.Get, pathParams: pathParams);
-        var response = await CallApiAsync(request, token);
+            var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
 
-        return HandleResponse<string, ErrorResponseBody>(response);
-    }
+            var request = CreateRequest(getConfigPath, HttpMethod.Get, pathParams: pathParams);
+            var response = await CallApiAsync(request, token);
 
-    public async Task<string> GetDynamicConfig(string contentId, string userId, IDictionary<string, object> parameters, CancellationToken token = default)
-    {
-        ConfigValidate(contentId);
+            return HandleResponse<string, ErrorResponseBody>(response);
+        }
 
-        var pathParams = new List<(string, string)> { ("contentId", contentId) };
-        var postBody = new GetDynamicConfigRequestBody() { UserId = userId, Parameters = parameters };
+        public async Task<string> GetDynamicConfig(string contentId, string userId, IDictionary<string, object> parameters, CancellationToken token = default)
+        {
+            ConfigValidate(contentId);
 
-        var request = CreateRequest(getConfigPath, HttpMethod.Post, pathParams: pathParams, postBody: postBody);
-        var response = await CallApiAsync(request, token);
+            var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
+            var postBody = new GetDynamicConfigRequestBody() { UserId = userId, Parameters = parameters };
 
-        return HandleResponse<string, ErrorResponseBody>(response);
-    }
+            var request = CreateRequest(getConfigPath, HttpMethod.Post, pathParams: pathParams, postBody: postBody);
+            var response = await CallApiAsync(request, token);
 
-    private static void ConfigValidate(string contentId)
-    {
-        if (string.IsNullOrEmpty(contentId))
-            throw new JoystickApiException(HttpStatusCode.BadRequest, "Missing required parameter 'contentId'");
+            return HandleResponse<string, ErrorResponseBody>(response);
+        }
+
+        private static void ConfigValidate(string contentId)
+        {
+            if (string.IsNullOrEmpty(contentId))
+                throw new JoystickApiException(HttpStatusCode.BadRequest, "Missing required parameter 'contentId'");
+        }
     }
 }

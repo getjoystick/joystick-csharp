@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using JoystickClient.Client;
 using JoystickClient.Core;
@@ -43,7 +43,7 @@ namespace JoystickClient.Api
 
                 return typeof(TSuccess) == typeof(string) ? (TSuccess)Convert.ChangeType(response.Content, typeof(TSuccess)) : JsonConvert.DeserializeObject<TSuccess>(response.Content);
             }
-            catch (Exception e) when (e is not JoystickApiException)
+            catch (Exception e) when (!(e is JoystickApiException))
             {
                 throw new JoystickApiException(HttpStatusCode.InternalServerError, e.Message);
             }
@@ -61,8 +61,11 @@ namespace JoystickClient.Api
         /// <param name="pathParams"></param>
         /// <param name="contentType"></param>
         /// <returns></returns>
-        protected static JoystickApiRequest CreateRequest(string path, HttpMethod method, List<(string, string)> queryParams = null, object postBody = null, List<(string, string)> headerParams = null,
-                                                List<(string, string)> formParams = null, List<(string, string)> pathParams = null, string contentType = null)
+        protected static JoystickApiRequest CreateRequest(string path, HttpMethod method, 
+            List<KeyValuePair<string, string>> queryParams = null, object postBody = null, 
+            List<KeyValuePair<string, string>> headerParams = null,
+            List<KeyValuePair<string, string>> formParams = null, 
+            List<KeyValuePair<string, string>> pathParams = null, string contentType = null)
         {
             var url = $"{Constants.ApiBasePath}{path}";
             return new JoystickApiRequest(method, url, queryParams, postBody, headerParams, formParams, pathParams, contentType);

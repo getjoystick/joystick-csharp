@@ -1,5 +1,6 @@
-namespace JoystickClient.Interfaces;
-
-public interface IEnvironmentApi
+namespace JoystickClient.Interfaces
 {
+    public interface IEnvironmentApi
+    {
+    }
 }

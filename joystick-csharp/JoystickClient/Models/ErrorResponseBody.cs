@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JoystickClient.Models;
-
-public sealed record ErrorResponseBody
+namespace JoystickClient.Models
 {
-    public string Data { get; init; }
-    public int Status { get; init; }
-    public string message { get; init; }
-    public string[] Details { get; init; }
-}    
+    public sealed class ErrorResponseBody
+    {
+        public string Data { get; set; }
+        public int Status { get; set; }
+        public string message { get; set; }
+        public string[] Details { get; set; }
+    }
+}

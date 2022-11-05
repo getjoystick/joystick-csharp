@@ -5,12 +5,13 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace JoystickClient.Models;
-
-internal sealed record GetDynamicConfigRequestBody
+namespace JoystickClient.Models
 {
-    [JsonPropertyName("u")]
-    public string UserId { get; init; }
-    [JsonPropertyName("p")]
-    public IDictionary<string, object> Parameters { get; init; }
+    internal sealed class GetDynamicConfigRequestBody
+    {
+        [JsonPropertyName("u")]
+        public string UserId { get; set; }
+        [JsonPropertyName("p")]
+        public IDictionary<string, object> Parameters { get; set; }
+    }
 }
