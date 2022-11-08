@@ -1,5 +1,7 @@
+using System;
 using System.Net.Http;
 using JoystickClient.Api;
+using JoystickClient.Clients;
 using JoystickClient.Interfaces;
 
 namespace JoystickClient.Client
@@ -7,6 +9,8 @@ namespace JoystickClient.Client
     public sealed class JoystickApiClient
     {
         public IConfigApi Config { get; }
+        public IEnvironmentApi Environment { get; }
+        public IInfoApi Info { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JoystickApiClient"/> class.
@@ -24,7 +28,10 @@ namespace JoystickClient.Client
         public JoystickApiClient(string apiKey, HttpClient httpClient)
         {
             var joystickApiHttpClient = new JoystickApiHttpClient(apiKey, httpClient);
+
             Config = new ConfigApi(joystickApiHttpClient);
+            Environment = new EnvironmentApi(joystickApiHttpClient);
+            Info = new InfoApi(joystickApiHttpClient);
         }
     }
 }

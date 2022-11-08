@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace JoystickClient.Api
 {
     internal abstract class ApiBase
-    {       
+    {
         private IJoystickApiHttpClient _httpClient;
 
         protected ApiBase(IJoystickApiHttpClient httpClient)
@@ -61,13 +61,14 @@ namespace JoystickClient.Api
         /// <param name="pathParams"></param>
         /// <param name="contentType"></param>
         /// <returns></returns>
-        protected static JoystickApiRequest CreateRequest(string path, HttpMethod method, 
-            List<KeyValuePair<string, string>> queryParams = null, object postBody = null, 
+        protected static JoystickApiRequest CreateRequest(string path, HttpMethod method,
+            List<KeyValuePair<string, string>> queryParams = null, object postBody = null,
             List<KeyValuePair<string, string>> headerParams = null,
-            List<KeyValuePair<string, string>> formParams = null, 
-            List<KeyValuePair<string, string>> pathParams = null, string contentType = null)
+            List<KeyValuePair<string, string>> formParams = null,
+            List<KeyValuePair<string, string>> pathParams = null, string contentType = null, bool useApiVersion = true)
         {
-            var url = $"{Constants.ApiBasePath}{path}";
+            var url = $"{Constants.ApiBasePath}/{(useApiVersion ? Constants.ApiVersion + "/" : string.Empty)}{path}";
+
             return new JoystickApiRequest(method, url, queryParams, postBody, headerParams, formParams, pathParams, contentType);
         }
 

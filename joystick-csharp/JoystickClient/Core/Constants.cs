@@ -9,6 +9,7 @@ namespace JoystickClient.Core
     internal class Constants
     {
         internal const string ApiKeyHeaderName = "X-Api-Key";
-        internal const string ApiBasePath = "https://api.getjoystick.com/api/v1";
+        internal const string ApiVersion = "v1";
+        internal const string ApiBasePath = "https://api.getjoystick.com/api";
     }
 }
