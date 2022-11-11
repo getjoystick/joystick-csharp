@@ -6,6 +6,6 @@ namespace JoystickClient.Clients
 {
     public interface IInfoApi
     {
-        Task<string> GetOpsDeckApiVersionAsync(CancellationToken token = default);
+        Task<string> GetApiVersionAsync(CancellationToken token = default);
     }
 }

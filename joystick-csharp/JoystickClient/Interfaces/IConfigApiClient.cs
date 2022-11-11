@@ -53,7 +53,8 @@ namespace JoystickClient.Interfaces
         /// <param name="responseType"></param>
         /// <param name="token"></param>
         /// <returns>Task of GetDynamicConfigHashResponse</returns>
-        Task<GetVeryDynamicConfigResponse> GetVeryDynamicConfigAsync(string contentId, string userId, IDictionary<string, object> parameters, DynamicConfigResponseType responseType, CancellationToken token = default);
+        Task<GetVeryDynamicConfigResponse> GetVeryDynamicConfigAsync(string contentId, string userId, IDictionary<string, object> parameters, 
+            DynamicConfigResponseType responseType = DynamicConfigResponseType.Parsed, CancellationToken token = default);
 
         /// <summary>
         /// Retrieves dynamic config hash with wrapper by content Id.

@@ -6,7 +6,7 @@ using JoystickClient.Interfaces;
 
 namespace JoystickClient.Client
 {
-    public sealed class JoystickApiClient
+    public sealed class JoystickApiClient : IJoystickApiClient
     {
         public IConfigApi Config { get; }
         public IEnvironmentApi Environment { get; }
@@ -18,6 +18,8 @@ namespace JoystickClient.Client
         /// <param name="apiKey">Api key for authentication.</param>   
         public JoystickApiClient(string apiKey) : this(apiKey, null)
         {
+            if (string.IsNullOrWhiteSpace(apiKey))
+                throw new ArgumentNullException(nameof(apiKey));
         }
 
         /// <summary>

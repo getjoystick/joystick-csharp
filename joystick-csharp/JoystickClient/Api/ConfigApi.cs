@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using JoystickClient.Client;
@@ -13,7 +14,6 @@ using JoystickClient.Models.ApiResponse;
 
 namespace JoystickClient.Api
 {
-
     internal sealed class ConfigApi : ApiBase, IConfigApi
     {
         private const string getConfigPath = "config/{contentId}";
@@ -27,7 +27,7 @@ namespace JoystickClient.Api
 
         public async Task<string> GetConfigAsync(string contentId, CancellationToken token = default)
         {
-            ConfigValidate(contentId);
+            ValidateParameter(contentId, "contentId");
 
             var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
 
@@ -39,7 +39,8 @@ namespace JoystickClient.Api
 
         public async Task<string> GetDynamicConfig(string contentId, string userId, IDictionary<string, object> parameters, CancellationToken token = default)
         {
-            ConfigValidate(contentId);
+            ValidateParameter(contentId, "contentId");
+            ValidateParameter(userId, "userId");
 
             var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
             var postBody = new GetDynamicConfigRequestBody() { UserId = userId, Parameters = parameters };
@@ -52,7 +53,8 @@ namespace JoystickClient.Api
 
         public async Task<GetDynamicConfigHashResponse> GetDynamicConfigHashAsync(string contentId, string userId, IDictionary<string, object> parameters, CancellationToken token = default)
         {
-            ConfigValidate(contentId);
+            ValidateParameter(contentId, "contentId");
+            ValidateParameter(userId, "userId");
 
             var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
             var postBody = new GetDynamicConfigRequestBody() { UserId = userId, Parameters = parameters };
@@ -65,7 +67,8 @@ namespace JoystickClient.Api
 
         public async Task<GetVeryDynamicConfigResponse> GetVeryDynamicConfigAsync(string contentId, string userId, IDictionary<string, object> parameters, DynamicConfigResponseType responseType = DynamicConfigResponseType.Parsed, CancellationToken token = default)
         {
-            ConfigValidate(contentId);
+            ValidateParameter(contentId, "contentId");
+            ValidateParameter(userId, "userId");
 
             var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
             var postBody = new GetDynamicConfigRequestBody() { UserId = userId, Parameters = parameters };
@@ -79,7 +82,8 @@ namespace JoystickClient.Api
 
         public async Task<GetDynamicConfigHashResponse> GetVeryDynamicConfigHashAsync(string contentId, string userId, IDictionary<string, object> parameters, CancellationToken token = default)
         {
-            ConfigValidate(contentId);
+            ValidateParameter(contentId, "contentId");
+            ValidateParameter(userId, "userId");
 
             var pathParams = new List<KeyValuePair<string, string>> { new KeyValuePair<string, string>("contentId", contentId) };
             var postBody = new GetDynamicConfigRequestBody() { UserId = userId, Parameters = parameters };
@@ -90,10 +94,10 @@ namespace JoystickClient.Api
             return HandleResponse<GetDynamicConfigHashResponse, ErrorResponseBody>(response);
         }
 
-        private static void ConfigValidate(string contentId)
+        private static void ValidateParameter(string parameter, string parameterName)
         {
-            if (string.IsNullOrEmpty(contentId))
-                throw new JoystickApiException(HttpStatusCode.BadRequest, "Missing required parameter 'contentId'");
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentNullException(parameterName);
         }
     }
 }

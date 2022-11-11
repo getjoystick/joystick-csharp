@@ -17,7 +17,7 @@ namespace JoystickClient.Api
         {
         }
 
-        public async Task<string> GetOpsDeckApiVersionAsync(CancellationToken token = default)
+        public async Task<string> GetApiVersionAsync(CancellationToken token = default)
         {
             var request = CreateRequest(getOpsDeckApiVersionPath, HttpMethod.Get, useApiVersion: false);
             var response = await CallApiAsync(request, token);
