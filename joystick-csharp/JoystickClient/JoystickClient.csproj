@@ -14,16 +14,16 @@
     <Product>joystick-csharp</Product>
     <Description>C# client for the GetJoystick Web Api</Description>
     <PackageProjectUrl>https://github.com/getjoystick/joystick-csharp</PackageProjectUrl>
-    <PackageTags>getjoystick;joystick</PackageTags>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>    
-    <PackageIcon>packageIcon.png</PackageIcon>
+    <PackageTags>remote config, dynamic config, joystick, json</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>    
+    <PackageIcon>packageIcon.jpg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/getjoystick/joystick-csharp</RepositoryUrl>  
+    <RepositoryUrl>https://github.com/getjoystick/joystick-csharp</RepositoryUrl>
+    <Copyright>All rights reserved.</Copyright>  
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\packageIcon.png">
+    <None Include="..\..\packageIcon.jpg">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
