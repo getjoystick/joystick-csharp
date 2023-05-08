@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joystick.Net.Client", "src\Joystick.Net.Client\Joystick.Net.Client.csproj", "{A12D8CF1-D4D9-434D-BF8A-5ACDA7DC5EF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5FF23401-D2D9-41D2-9042-24C03F920DC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0D0B8B6B-472E-45FE-AC26-1C1AAFDF5A6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joystick.Net.UnitTests", "tests\Joystick.Net.UnitTests\Joystick.Net.UnitTests.csproj", "{673CC9AF-CEB3-4AE1-8135-9E5156084493}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_stylecop", "_stylecop", "{B4EE64B2-A86F-4B3C-BB6D-F74737313278}"
+	ProjectSection(SolutionItems) = preProject
+		_stylecop\JoystickNet.ruleset = _stylecop\JoystickNet.ruleset
+		_stylecop\JoystickNetTests.ruleset = _stylecop\JoystickNetTests.ruleset
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A12D8CF1-D4D9-434D-BF8A-5ACDA7DC5EF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12D8CF1-D4D9-434D-BF8A-5ACDA7DC5EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12D8CF1-D4D9-434D-BF8A-5ACDA7DC5EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12D8CF1-D4D9-434D-BF8A-5ACDA7DC5EF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{673CC9AF-CEB3-4AE1-8135-9E5156084493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{673CC9AF-CEB3-4AE1-8135-9E5156084493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{673CC9AF-CEB3-4AE1-8135-9E5156084493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{673CC9AF-CEB3-4AE1-8135-9E5156084493}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A12D8CF1-D4D9-434D-BF8A-5ACDA7DC5EF0} = {5FF23401-D2D9-41D2-9042-24C03F920DC9}
+		{673CC9AF-CEB3-4AE1-8135-9E5156084493} = {0D0B8B6B-472E-45FE-AC26-1C1AAFDF5A6F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F636C756-B475-4390-914D-16EB3D61D736}
+	EndGlobalSection
+EndGlobal
