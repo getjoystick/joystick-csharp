@@ -1,6 +1,7 @@
 ﻿using System;
+using Joystick.Client.Models;
 
-namespace Joystick.Net.Client
+namespace Joystick.Client
 {
     public class JoystickClient : IJoystickClient
     {

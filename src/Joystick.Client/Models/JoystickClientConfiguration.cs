@@ -1,4 +1,4 @@
-﻿namespace Joystick.Net.Client
+﻿namespace Joystick.Client.Models
 {
     public class JoystickClientConfiguration
     {

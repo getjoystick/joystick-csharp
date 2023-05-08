@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFrameworks>net6.0;net5.0;netcoreapp3.1</TargetFrameworks>
@@ -25,11 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Joystick.Net.Client\Joystick.Net.Client.csproj" />
+    <ProjectReference Include="..\..\src\Joystick.Client\Joystick.Client.csproj" />
   </ItemGroup>
 
 	<PropertyGroup>
-		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickNet.ruleset</CodeAnalysisRuleSet>
-		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickNetTests.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickTestRules.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickRules.ruleset</CodeAnalysisRuleSet>
 	</PropertyGroup>
 </Project>

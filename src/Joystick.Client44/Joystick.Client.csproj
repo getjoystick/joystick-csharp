@@ -31,7 +31,7 @@
   </ItemGroup>
 
 	<PropertyGroup>
-		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickNet.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickRules.ruleset</CodeAnalysisRuleSet>
 	</PropertyGroup>
 
 	<ItemGroup>

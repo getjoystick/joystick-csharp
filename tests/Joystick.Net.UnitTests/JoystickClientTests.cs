@@ -1,13 +1,14 @@
 using System;
-using Joystick.Net.Client;
+using Joystick.Client;
+using Joystick.Client.Models;
 using Xunit;
 
-namespace Joystick.Net.UnitTests
+namespace Joystick.UnitTests
 {
     public class JoystickClientTests
     {
         [Fact]
-        public void DummyTest()
+        public void WhenApiKeyIsNull_JoystickClientConstructor_ShouldThrowException()
         {
             var config = new JoystickClientConfiguration();
 

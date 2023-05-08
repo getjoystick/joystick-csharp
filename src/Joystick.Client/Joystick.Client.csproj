@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net5.0;netcoreapp3.1;;netstandard2.1</TargetFrameworks>
+		<IsPackable>true</IsPackable>
+		<RootNamespace>Joystick.Client</RootNamespace>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageId>joystick-csharp</PackageId>
+		<Title>Joystick .Net client</Title>
+		<VersionPrefix>1.0.1</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
+		<Version>$(VersionPrefix)-$(VersionSuffix)</Version>
+		<Authors>Joystick</Authors>
+		<Company>Joystick</Company>
+		<Product>joystick-csharp</Product>
+		<Description>C# client for the GetJoystick Web Api</Description>
+		<PackageProjectUrl>https://github.com/getjoystick/joystick-csharp</PackageProjectUrl>
+		<PackageTags>remote config, dynamic config, joystick, json</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>packageIcon.jpg</PackageIcon>
+		<RepositoryUrl>https://github.com/getjoystick/joystick-csharp</RepositoryUrl>
+		<Copyright>All rights reserved.</Copyright>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<CodeAnalysisRuleSet>..\..\_stylecop\JoystickRules.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="" />
+		<None Include="..\..\packageIcon.jpg" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+</Project>
