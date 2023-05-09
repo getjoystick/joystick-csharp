@@ -11,7 +11,7 @@ namespace Joystick.Client
         {
             if (configuration?.ApiKey == null)
             {
-                throw new ArgumentNullException(configuration?.ApiKey);
+                throw new ArgumentNullException(nameof(configuration.ApiKey));
             }
 
             this.configuration = configuration;
