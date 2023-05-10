@@ -1,0 +1,29 @@
+name: Test code
+
+on: [ push ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x', '5.0.x', '6.0.x' ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate author email
+        uses: tfisicaro/commit-email-validation-action@v1
+        with:
+          domains: "getjoystick.com;github.com"
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal
