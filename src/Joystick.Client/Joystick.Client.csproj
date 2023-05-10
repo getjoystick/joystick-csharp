@@ -18,6 +18,7 @@
 		<PackageTags>remote config, dynamic config, joystick, json</PackageTags>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageIcon>packageIcon.jpg</PackageIcon>
 		<RepositoryUrl>https://github.com/getjoystick/joystick-csharp</RepositoryUrl>
 		<Copyright>All rights reserved.</Copyright>
@@ -29,6 +30,7 @@
 
 	<ItemGroup>
 		<None Include="..\..\README.md" Pack="true" PackagePath="" />
+		<None Include="..\..\LICENSE.md" Pack="true" PackagePath="" />
 		<None Include="..\packageIcon.jpg" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 
