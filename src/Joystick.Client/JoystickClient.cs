@@ -1,15 +1,16 @@
-﻿using System;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using Joystick.Client.Core;
+﻿using Joystick.Client.Core;
 using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
 using Joystick.Client.Utils;
 using Microsoft.Extensions.Options;
+using System;
+using System.Net.Http;
+using System.Reflection;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Threading.Tasks;
 
 namespace Joystick.Client
 {
@@ -34,13 +35,13 @@ namespace Joystick.Client
         {
         }
 
-        public async Task<JoystickFullResponse<T>> GetContentAsync<T>(string contentId, JoystickContentOptions options = null)
+        public async Task<JoystickFullResponse<T>> GetContentAsyncV1<T>(string contentId, JoystickContentOptions options = null)
         {
             var responseBody = await this.GetContentJsonAsync(contentId);
             return this.TryToDeserializeContent<T>(responseBody);
         }
 
-        public async Task<JoystickFullResponse<string>> GetContentAsync(string contentId, JoystickContentOptions options = null)
+        public async Task<JoystickFullResponse<string>> GetContentAsyncV1(string contentId, JoystickContentOptions options = null)
         {
             var responseBody =
                 await this.GetContentJsonAsync(contentId);
@@ -55,12 +56,47 @@ namespace Joystick.Client
             };
         }
 
+        public async Task<IJoystickContent> GetContentV2<T>(string contentId, JoystickContentOptions options = null) 
+        {
+            if (options != null)
+            {
+                if (options.Serialized && !options.FullResponse && !typeof(T).IsAssignableFrom(typeof(JoystickSerializedContent)))
+                {
+                    throw new ArgumentException($"Unsupported combination");
+                }
+            }
+
+
+            if (options != null && options.FullResponse)
+            {
+                if (options.Serialized)
+                {
+                    return await this.GetContentAsyncV1(contentId, options);
+                }
+
+                return await this.GetContentAsyncV1<T>(contentId, options);
+            }
+
+            if (options != null && options.Serialized)
+            {
+
+                var full = await this.GetContentAsyncV1(contentId, options);
+                return new JoystickSerializedContent()
+                {
+                    Data = full.Data,
+                };
+            }
+
+            var content = await this.GetContentAsyncV1<T>(contentId, options);
+            return (IJoystickContent)content.Data;
+        }
+
         private JoystickFullResponse<TOutput> TryToDeserializeContent<TOutput>(string json)
         {
             try
             {
-               var content = JsonSerializer.Deserialize<JoystickFullResponse<TOutput>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-               return content;
+                var content = JsonSerializer.Deserialize<JoystickFullResponse<TOutput>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                return content;
             }
             catch (Exception ex)
             {

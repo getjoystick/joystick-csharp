@@ -1,4 +1,6 @@
-﻿namespace UsageClientExample
+﻿using Joystick.Client.Models;
+
+namespace UsageClientExample
 {
     internal class MyAppConfig
     {

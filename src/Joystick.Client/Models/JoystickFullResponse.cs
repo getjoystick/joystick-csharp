@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Joystick.Client.Models
 {
-    public class JoystickFullResponse<T>
+    public class JoystickFullResponse<T> : IJoystickContent
     {
         public JoystickMetaData Meta { get; set; }
 
