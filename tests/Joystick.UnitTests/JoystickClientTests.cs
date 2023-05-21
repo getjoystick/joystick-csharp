@@ -10,7 +10,7 @@ namespace Joystick.UnitTests
         [Fact]
         public void WhenApiKeyIsNull_JoystickClientConstructor_ShouldThrowException()
         {
-            var config = new JoystickClientConfiguration();
+            var config = new JoystickClientConfig();
 
             Assert.Throws<ArgumentNullException>(() => new JoystickClient(config));
         }
