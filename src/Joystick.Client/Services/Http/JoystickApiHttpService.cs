@@ -29,7 +29,7 @@ namespace Joystick.Client.Services.Http
             var requestUrl = $"{Constants.BaseReadUrl}/v1/config/{contentId}/dynamic";
             if (settings.IsContentSerialized)
             {
-                requestUrl += "&responseType=serialized";
+                requestUrl += "?responseType=serialized";
             }
 
             var requestBody = settings.ClientConfig.MapToGetContentRequestBody();
