@@ -8,9 +8,9 @@ namespace Joystick.UnitTests
     public class JoystickClientTests
     {
         [Fact]
-        public void WhenApiKeyIsNull_JoystickClientConstructor_ShouldThrowException()
+        public void JoystickClientConstructor_WhenApiKeyIsNull_ShouldThrowException()
         {
-            var config = new JoystickClientConfiguration();
+            var config = new JoystickClientConfig();
 
             Assert.Throws<ArgumentNullException>(() => new JoystickClient(config));
         }
