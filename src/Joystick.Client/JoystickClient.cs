@@ -2,7 +2,10 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Joystick.Client.Models;
+using Joystick.Client.Models.Api;
 using Joystick.Client.Services;
+using Joystick.Client.Services.Http;
+using Joystick.Client.Services.Serialization;
 using Joystick.Client.Utils;
 using Newtonsoft.Json.Linq;
 
@@ -31,7 +34,8 @@ namespace Joystick.Client
 
         public async Task<JoystickFullContentResponse<TData>> GetFullContentAsync<TData>(string contentId, JoystickContentOptions options = null)
         {
-            var responseBody = await this.GetSerializedFullContentAsync(contentId, options);
+            var settings = new GetContentSettings(this.config, options, typeof(TData));
+            var responseBody = await this.GetSerializedFullContentAsync(contentId, settings);
             return this.outputSerializer.Deserialize<JoystickFullContentResponse<TData>>(responseBody);
         }
 
@@ -52,14 +56,14 @@ namespace Joystick.Client
             return fullContent.Data;
         }
 
-        private Task<string> GetSerializedFullContentAsync(string contentId, JoystickContentOptions options = null)
+        private Task<string> GetSerializedFullContentAsync(string contentId, GetContentSettings settings)
         {
             if (string.IsNullOrWhiteSpace(contentId))
             {
                 throw new ArgumentException($"{nameof(contentId)} can't be empty");
             }
 
-            return this.httpService.GetContentJsonAsync(contentId, this.config);
+            return this.httpService.GetContentJsonAsync(contentId, settings);
         }
     }
 }

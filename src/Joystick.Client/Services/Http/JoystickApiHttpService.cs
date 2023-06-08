@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Joystick.Client.Core;
 using Joystick.Client.Exceptions;
-using Joystick.Client.Models;
+using Joystick.Client.Models.Api;
 using Joystick.Client.Utils;
 using Newtonsoft.Json;
 
-namespace Joystick.Client.Services
+namespace Joystick.Client.Services.Http
 {
     public class JoystickApiHttpService : IJoystickApiHttpService
     {
@@ -21,7 +19,7 @@ namespace Joystick.Client.Services
             this.httpClient = httpClient;
         }
 
-        public async Task<string> GetContentJsonAsync(string contentId, JoystickClientConfig config)
+        public async Task<string> GetContentJsonAsync(string contentId, GetContentSettings settings)
         {
             if (string.IsNullOrWhiteSpace(contentId))
             {
@@ -29,10 +27,15 @@ namespace Joystick.Client.Services
             }
 
             var requestUrl = $"{Constants.BaseReadUrl}/v1/config/{contentId}/dynamic";
-            var requestBody = config.MapToGetContentRequestBody();
+            if (settings.IsContentSerialized)
+            {
+                requestUrl += "&responseType=serialized";
+            }
+
+            var requestBody = settings.ClientConfig.MapToGetContentRequestBody();
 
             var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
-            request.Headers.Add(Constants.ApiKeyHeaderName, config.ApiKey);
+            request.Headers.Add(Constants.ApiKeyHeaderName, settings.ClientConfig.ApiKey);
             request.Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
             var response = await this.SendRequestAsync(request);

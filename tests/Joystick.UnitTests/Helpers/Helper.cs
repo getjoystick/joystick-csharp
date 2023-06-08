@@ -6,6 +6,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Joystick.Client.Models;
+using Joystick.Client.Models.Api;
 using Moq;
 using Moq.Protected;
 
@@ -30,6 +32,11 @@ namespace Joystick.UnitTests.Helpers
                     ItExpr.IsAny<CancellationToken>())
                 .ReturnsAsync(response);
             return new HttpClient(handlerMock.Object);
+        }
+
+        public static GetContentSettings CreateGetContentSettings()
+        {
+            return new GetContentSettings(new JoystickClientConfig(), new JoystickContentOptions(), false);
         }
     }
 }
