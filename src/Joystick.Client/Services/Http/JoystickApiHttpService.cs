@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +20,13 @@ namespace Joystick.Client.Services.Http
             this.httpClient = httpClient;
         }
 
-        public async Task<string> GetContentJsonAsync(string contentId, GetContentSettings settings)
+        public async Task<string> GetJsonContentsAsync(IEnumerable<string> contentIds, GetContentSettings settings)
         {
-            if (string.IsNullOrWhiteSpace(contentId))
-            {
-                throw new ArgumentException($"{nameof(contentId)} should not be empty");
-            }
+            var requestUrl = $"{Constants.BaseReadUrl}/v1/combine/?dynamic=true&c={JsonConvert.SerializeObject(contentIds)}";
 
-            var requestUrl = $"{Constants.BaseReadUrl}/v1/config/{contentId}/dynamic";
             if (settings.IsContentSerialized)
             {
-                requestUrl += "?responseType=serialized";
+                requestUrl += "&responseType=serialized";
             }
 
             var requestBody = settings.ClientConfig.MapToGetContentRequestBody();
