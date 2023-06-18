@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
-namespace Joystick.Client.Models.Api
+[assembly: InternalsVisibleTo("Joystick.UnitTests")]
+
+namespace Joystick.Client.Models.Internal.Api
 {
-    public class GetContentRequestBody
+    internal class GetContentRequestBody
     {
         [JsonProperty("u")]
         public string UserId { get; set; }

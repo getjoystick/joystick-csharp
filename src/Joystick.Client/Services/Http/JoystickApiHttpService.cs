@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Joystick.Client.Core;
 using Joystick.Client.Exceptions;
-using Joystick.Client.Models.Api;
+using Joystick.Client.Models.Internal.Api;
 using Joystick.Client.Utils;
 using Newtonsoft.Json;
 
+[assembly: InternalsVisibleTo("Joystick.UnitTests")]
+
 namespace Joystick.Client.Services.Http
 {
-    public class JoystickApiHttpService : IJoystickApiHttpService
+    internal class JoystickApiHttpService
     {
         private readonly HttpClient httpClient;
 

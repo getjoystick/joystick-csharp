@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Joystick.Client.Models;
-using Joystick.Client.Models.Api;
+using Joystick.Client.Models.Internal.Api;
 using Newtonsoft.Json;
+
+[assembly: InternalsVisibleTo("Joystick.UnitTests")]
 
 namespace Joystick.Client.Utils
 {
-    public static class JoystickClientConfigurationExtensions
+    internal static class JoystickClientConfigurationExtensions
     {
-        public static JoystickClientConfig Clone(this JoystickClientConfig config)
+        internal static JoystickClientConfig Clone(this JoystickClientConfig config)
         {
             var jsonString = JsonConvert.SerializeObject(config);
             return JsonConvert.DeserializeObject<JoystickClientConfig>(jsonString);
         }
 
-        public static GetContentRequestBody MapToGetContentRequestBody(this JoystickClientConfig config)
+        internal static GetContentRequestBody MapToGetContentRequestBody(this JoystickClientConfig config)
         {
             var requestBody = new GetContentRequestBody
             {

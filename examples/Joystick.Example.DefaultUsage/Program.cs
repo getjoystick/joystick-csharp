@@ -1,4 +1,5 @@
 ﻿using Joystick.Client;
+using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 
 var config = new JoystickClientConfig()
@@ -16,6 +17,15 @@ var contents = await joystickClient.GetContentsAsync<string>(new[] { "my-app", "
 foreach (var key in contents.Keys)
 {
     Console.WriteLine($"{key}: {contents[key]}");
+}
+
+try
+{ 
+    var contentsWithError = await joystickClient.GetContentsAsync<string>(new[] {"my-app_771"});
+}
+catch (MultipleContentsApiException exception)
+{
+    Console.WriteLine(exception.Message);
 }
 
 Console.ReadKey();

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
-namespace Joystick.Client.Models.Api
+[assembly: InternalsVisibleTo("Joystick.UnitTests")]
+
+namespace Joystick.Client.Models.Internal.Api
 {
-    public class GetContentSettings
+    internal class GetContentSettings
     {
         public GetContentSettings(JoystickClientConfig clientConfig, JoystickContentOptions contentOptions, bool isContentSerialized)
         {

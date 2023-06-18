@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Joystick.Client.Services.Serialization
+﻿namespace Joystick.Client.Services.Serialization
 {
     public interface IJsonOutputSerializer
     {
