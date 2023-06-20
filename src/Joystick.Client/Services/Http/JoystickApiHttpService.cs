@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Joystick.Client.Core;
 using Joystick.Client.Exceptions;
-using Joystick.Client.Models.Internal.Api;
+using Joystick.Client.Models.Api;
 using Joystick.Client.Utils;
 using Newtonsoft.Json;
 

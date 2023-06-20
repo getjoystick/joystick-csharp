@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Joystick.Client.Models;
-using Joystick.Client.Models.Internal.Api;
+using Joystick.Client.Models.Api;
 using Moq;
 using Moq.Protected;
 

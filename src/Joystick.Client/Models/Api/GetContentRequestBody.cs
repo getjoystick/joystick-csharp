@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Joystick.Client.Models.Internal.Api
+namespace Joystick.Client.Models.Api
 {
     internal class GetContentRequestBody
     {

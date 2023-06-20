@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Joystick.Client.Models;
-using Joystick.Client.Models.Internal.Api;
+using Joystick.Client.Models.Api;
 using Newtonsoft.Json;
 
 
