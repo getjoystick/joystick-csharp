@@ -17,7 +17,7 @@ namespace Joystick.Client.Utils.Validators
               'type': 'object',
               'properties': {
                 'hash': {'type':'string'},
-                'meta': {'type':'string'},
+                'meta': {'type':'object'},
                 'data': {
                   'type': ['object', 'string'] ,
                 }
