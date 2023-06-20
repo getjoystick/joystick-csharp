@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
+using Joystick.Client.Models.Internal;
 using Joystick.Client.Services.Http;
 using Joystick.Client.Services.Serialization;
 using Joystick.Client.Utils;
 using Joystick.Client.Utils.Validators;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 
 namespace Joystick.Client
 {
