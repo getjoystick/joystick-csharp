@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Joystick.Client.Exceptions;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
-
-[assembly: InternalsVisibleTo("Joystick.UnitTests")]
 
 namespace Joystick.Client.Utils.Validators
 {

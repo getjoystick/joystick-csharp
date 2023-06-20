@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Joystick.UnitTests")]
 
 namespace Joystick.Client.Models.Internal.Api
 {

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Joystick.Client.Models;
 using Joystick.Client.Models.Internal.Api;
 using Newtonsoft.Json;
 
-[assembly: InternalsVisibleTo("Joystick.UnitTests")]
 
 namespace Joystick.Client.Utils
 {
