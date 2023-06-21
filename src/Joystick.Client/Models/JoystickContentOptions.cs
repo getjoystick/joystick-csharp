@@ -3,7 +3,7 @@
     public class JoystickContentOptions
     {
         /// <summary>
-        /// When Refresh is set to true – existing cache should be ignored.
+        /// The cache should be avoided, and the data must be requested from the API.
         /// </summary>
         public bool Refresh { get; set; }
     }
