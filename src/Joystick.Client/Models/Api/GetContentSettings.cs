@@ -6,16 +6,16 @@ namespace Joystick.Client.Models.Api
     {
         public GetContentSettings(JoystickClientConfig clientConfig, JoystickContentOptions contentOptions, bool isContentSerialized)
         {
-            IsContentSerialized = isContentSerialized;
-            ContentOptions = contentOptions;
-            ClientConfig = clientConfig;
+            this.IsContentSerialized = isContentSerialized;
+            this.ContentOptions = contentOptions;
+            this.ClientConfig = clientConfig;
         }
 
         public GetContentSettings(JoystickClientConfig clientConfig, JoystickContentOptions contentOptions, Type dataType)
         {
-            IsContentSerialized = dataType == typeof(string);
-            ContentOptions = contentOptions;
-            ClientConfig = clientConfig;
+            this.IsContentSerialized = dataType == typeof(string);
+            this.ContentOptions = contentOptions;
+            this.ClientConfig = clientConfig;
         }
 
         public bool IsContentSerialized { get; set; }

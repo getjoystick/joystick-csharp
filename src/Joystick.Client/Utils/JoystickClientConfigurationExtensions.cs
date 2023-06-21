@@ -3,7 +3,6 @@ using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
 using Newtonsoft.Json;
 
-
 namespace Joystick.Client.Utils
 {
     internal static class JoystickClientConfigurationExtensions

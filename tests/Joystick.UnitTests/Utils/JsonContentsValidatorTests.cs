@@ -9,7 +9,6 @@ namespace Joystick.UnitTests.Utils
 {
     public class JsonContentsValidatorTests
     {
-
         [Fact]
         public void Validate_ShouldThrow_JoystickApiBadRequestException()
         {
