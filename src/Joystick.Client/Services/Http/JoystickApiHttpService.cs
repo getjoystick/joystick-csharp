@@ -23,7 +23,7 @@ namespace Joystick.Client.Services.Http
 
         public async Task<string> GetJsonContentsAsync(IEnumerable<string> contentIds, GetContentSettings settings)
         {
-            var requestUrl = this.GenerateGetContentUrl(contentIds, settings.IsContentSerialized);
+            var requestUrl = UrlHelper.ConstructGetContentUrl(contentIds, settings.IsContentSerialized);
 
             var requestBody = settings.ClientConfig.MapToGetContentRequestBody();
 
@@ -33,22 +33,6 @@ namespace Joystick.Client.Services.Http
 
             var response = await this.SendRequestAsync(request);
             return await response.Content.ReadAsStringAsync();
-        }
-
-        private Uri GenerateGetContentUrl(IEnumerable<string> contentIds, bool isContentSerialized)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "dynamic", "true" },
-                { "c", JsonConvert.SerializeObject(contentIds) },
-            };
-
-            if (isContentSerialized)
-            {
-                queryParameters.Add("responseType", "serialized");
-            }
-
-            return new Uri(QueryHelpers.AddQueryString($"{Constants.BaseReadUrl}/v1/combine/", queryParameters));
         }
 
         private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage request)
