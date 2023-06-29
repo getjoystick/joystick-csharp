@@ -7,6 +7,7 @@ using Joystick.Client.Core;
 using Joystick.Client.Exceptions;
 using Joystick.Client.Models.Api;
 using Joystick.Client.Utils;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 
 namespace Joystick.Client.Services.Http
@@ -22,12 +23,7 @@ namespace Joystick.Client.Services.Http
 
         public async Task<string> GetJsonContentsAsync(IEnumerable<string> contentIds, GetContentSettings settings)
         {
-            var requestUrl = $"{Constants.BaseReadUrl}/v1/combine/?dynamic=true&c={JsonConvert.SerializeObject(contentIds)}";
-
-            if (settings.IsContentSerialized)
-            {
-                requestUrl += "&responseType=serialized";
-            }
+            var requestUrl = this.GenerateGetContentUrl(contentIds, settings.IsContentSerialized);
 
             var requestBody = settings.ClientConfig.MapToGetContentRequestBody();
 
@@ -37,6 +33,22 @@ namespace Joystick.Client.Services.Http
 
             var response = await this.SendRequestAsync(request);
             return await response.Content.ReadAsStringAsync();
+        }
+
+        private Uri GenerateGetContentUrl(IEnumerable<string> contentIds, bool isContentSerialized)
+        {
+            var queryParameters = new Dictionary<string, string>
+            {
+                { "dynamic", "true" },
+                { "c", JsonConvert.SerializeObject(contentIds) },
+            };
+
+            if (isContentSerialized)
+            {
+                queryParameters.Add("responseType", "serialized");
+            }
+
+            return new Uri(QueryHelpers.AddQueryString($"{Constants.BaseReadUrl}/v1/combine/", queryParameters));
         }
 
         private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage request)
