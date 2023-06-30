@@ -5,15 +5,15 @@ using Newtonsoft.Json;
 
 namespace Joystick.Client.Utils
 {
-    public static class JoystickClientConfigurationExtensions
+    internal static class JoystickClientConfigurationExtensions
     {
-        public static JoystickClientConfig Clone(this JoystickClientConfig config)
+        internal static JoystickClientConfig Clone(this JoystickClientConfig config)
         {
             var jsonString = JsonConvert.SerializeObject(config);
             return JsonConvert.DeserializeObject<JoystickClientConfig>(jsonString);
         }
 
-        public static GetContentRequestBody MapToGetContentRequestBody(this JoystickClientConfig config)
+        internal static GetContentRequestBody MapToGetContentRequestBody(this JoystickClientConfig config)
         {
             var requestBody = new GetContentRequestBody
             {

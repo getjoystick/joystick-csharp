@@ -10,13 +10,13 @@ namespace Joystick.UnitTests.Services
     public class JoystickApiHttpServiceTests
     {
         [Fact]
-        public async Task GetContentJsonAsync_ShouldReturn_SerializedHttpResponseBody()
+        public async Task GetJsonContentsAsync_ShouldReturn_SerializedHttpResponseBody()
         {
             var expectedJsonContent = DataHelper.GetSerializedContent();
             var httpClient = Helper.GetMockedHttpClient(HttpStatusCode.OK, expectedJsonContent);
             var httpService = new JoystickApiHttpService(httpClient);
 
-            var actualJsonContent = await httpService.GetContentJsonAsync("someId", Helper.CreateGetContentSettings());
+            var actualJsonContent = await httpService.GetJsonContentsAsync(new[] { "someId" }, Helper.CreateGetContentSettings());
 
             Assert.Equal(expectedJsonContent, actualJsonContent);
         }
@@ -24,35 +24,35 @@ namespace Joystick.UnitTests.Services
         [Theory]
         [InlineData(HttpStatusCode.InternalServerError)]
         [InlineData(HttpStatusCode.GatewayTimeout)]
-        public async Task GetContentJsonAsync_ShouldReturn_JoystickApiServerException(HttpStatusCode statusCode)
+        public async Task GetJsonContentsAsync_ShouldReturn_JoystickApiServerException(HttpStatusCode statusCode)
         {
             var httpClient = Helper.GetMockedHttpClient(statusCode, string.Empty);
             var httpService = new JoystickApiHttpService(httpClient);
 
-            await Assert.ThrowsAsync<JoystickApiServerException>(() => httpService.GetContentJsonAsync("someId", Helper.CreateGetContentSettings()));
+            await Assert.ThrowsAsync<JoystickApiServerException>(() => httpService.GetJsonContentsAsync(new[] { "someId" }, Helper.CreateGetContentSettings()));
         }
 
         [Theory]
         [InlineData(HttpStatusCode.BadRequest)]
         [InlineData(HttpStatusCode.Forbidden)]
         [InlineData(HttpStatusCode.Unauthorized)]
-        public async Task GetContentJsonAsync_ShouldReturn_JoystickApiBadRequestException(HttpStatusCode statusCode)
+        public async Task GetJsonContentsAsync_ShouldReturn_JoystickApiBadRequestException(HttpStatusCode statusCode)
         {
             var httpClient = Helper.GetMockedHttpClient(statusCode, string.Empty);
             var httpService = new JoystickApiHttpService(httpClient);
 
-            await Assert.ThrowsAsync<JoystickApiBadRequestException>(() => httpService.GetContentJsonAsync("someId", Helper.CreateGetContentSettings()));
+            await Assert.ThrowsAsync<JoystickApiBadRequestException>(() => httpService.GetJsonContentsAsync(new[] { "someId" }, Helper.CreateGetContentSettings()));
         }
 
         [Theory]
         [InlineData(HttpStatusCode.Continue)]
         [InlineData(HttpStatusCode.Ambiguous)]
-        public async Task GetContentJsonAsync_ShouldReturn_JoystickApiUnknownException(HttpStatusCode statusCode)
+        public async Task GetJsonContentsAsync_ShouldReturn_JoystickApiUnknownException(HttpStatusCode statusCode)
         {
             var httpClient = Helper.GetMockedHttpClient(statusCode, string.Empty);
             var httpService = new JoystickApiHttpService(httpClient);
 
-            await Assert.ThrowsAsync<JoystickApiUnknownException>(() => httpService.GetContentJsonAsync("someId", Helper.CreateGetContentSettings()));
+            await Assert.ThrowsAsync<JoystickApiUnknownException>(() => httpService.GetJsonContentsAsync(new[] { "someId" }, Helper.CreateGetContentSettings()));
         }
     }
 }

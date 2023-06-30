@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Joystick.Client.Models.Api
 {
-    public class GetContentRequestBody
+    internal class GetContentRequestBody
     {
         [JsonProperty("u")]
         public string UserId { get; set; }
