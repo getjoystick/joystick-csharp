@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Joystick.Client.Core;
+using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
 using Newtonsoft.Json;
@@ -23,6 +26,24 @@ namespace Joystick.Client.Utils
             };
 
             return requestBody;
+        }
+
+        internal static void Validate(this JoystickClientConfig config)
+        {
+            if (string.IsNullOrWhiteSpace(config.ApiKey))
+            {
+                throw new JoystickException($"{nameof(config.ApiKey)} is required and can't be empty.");
+            }
+
+            if (!(config.SemVer == null || Regex.IsMatch(config.SemVer, Constants.SemVerPattern)))
+            {
+                throw new JoystickException($"{nameof(config.SemVer)} must correspond semantic version pattern.");
+            }
+
+            if (config.CacheExpirationSeconds == 0)
+            {
+                throw new JoystickException($"{nameof(config.CacheExpirationSeconds)} must be null or greater than 0.");
+            }
         }
     }
 }
