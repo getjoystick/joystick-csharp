@@ -26,10 +26,12 @@ namespace Joystick.Client
             HttpClient httpClient = null,
             IJsonOutputSerializer outputSerializer = null)
         {
-            if (config?.ApiKey == null)
+            if (config == null)
             {
-                throw new ArgumentNullException(nameof(config.ApiKey));
+                throw new ArgumentNullException(nameof(config));
             }
+
+            config.Validate();
 
             this.config = config.Clone();
             this.httpService = new JoystickApiHttpService(httpClient ?? new HttpClient());

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 using Joystick.Client.Utils;
 using Xunit;
@@ -96,6 +97,79 @@ namespace Joystick.UnitTests.Utils
             var requestBody = originalConfig.MapToGetContentRequestBody();
 
             Assert.Equal(0, requestBody.Params.Keys.Count);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        public void Validate_ShouldThrowException_WhenApiKeyInvalid(string apiKey)
+        {
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = apiKey,
+            };
+
+            var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
+            Assert.Contains(nameof(config.ApiKey), exception.Message);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("v1.2.3")]
+        [InlineData("0.0.1-prerelease")]
+
+        public void Validate_ShouldThrowException_WhenSemVerInvalid(string semVer)
+        {
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = "key",
+                SemVer = semVer,
+            };
+
+            var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
+            Assert.Contains(nameof(config.SemVer), exception.Message);
+        }
+
+        [Fact]
+        public void Validate_ShouldThrowException_WhenCacheExpirationSecondsInvalid()
+        {
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = "key",
+                CacheExpirationSeconds = 0,
+            };
+
+            var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
+            Assert.Contains(nameof(config.CacheExpirationSeconds), exception.Message);
+        }
+
+        [Fact]
+        public void Validate_Should_NoThrowException_WhenCacheExpirationSecondsIsNull()
+        {
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = "key",
+                CacheExpirationSeconds = null,
+            };
+
+            var exception = Record.Exception(() => config.Validate());
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void Validate_Should_NotThrowException_WhenConfigValid()
+        {
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = "key",
+                CacheExpirationSeconds = 500,
+                SemVer = "1.0.5",
+            };
+
+            var exception = Record.Exception(() => config.Validate());
+            Assert.Null(exception);
         }
     }
 }

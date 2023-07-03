@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 
 namespace Joystick.Client.Models
 {
@@ -29,6 +27,6 @@ namespace Joystick.Client.Models
         /// <summary>
         /// Number of seconds while the cache is valid.
         /// </summary>
-        public uint CacheExpirationSeconds { get; set; }
+        public uint? CacheExpirationSeconds { get; set; }
     }
 }
