@@ -19,7 +19,7 @@ namespace Joystick.UnitTests
         {
             var config = new JoystickClientConfig();
 
-            Assert.Throws<JoystickException>(() => new JoystickClient(config));
+            Assert.Throws<JoystickConfigurationException>(() => new JoystickClient(config));
         }
     }
 }
