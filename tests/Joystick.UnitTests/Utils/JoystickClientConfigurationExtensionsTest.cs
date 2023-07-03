@@ -110,7 +110,7 @@ namespace Joystick.UnitTests.Utils
                 ApiKey = apiKey,
             };
 
-            var exception = Assert.Throws<JoystickException>(() => config.Validate());
+            var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
             Assert.Contains(nameof(config.ApiKey), exception.Message);
         }
 
@@ -120,7 +120,7 @@ namespace Joystick.UnitTests.Utils
         [InlineData("v1.2.3")]
         [InlineData("0.0.1-prerelease")]
 
-        public void Validate_ShouldThrowException_WhenSenVerInvalid(string semVer)
+        public void Validate_ShouldThrowException_WhenSemVerInvalid(string semVer)
         {
             var config = new JoystickClientConfig()
             {
@@ -128,7 +128,7 @@ namespace Joystick.UnitTests.Utils
                 SemVer = semVer,
             };
 
-            var exception = Assert.Throws<JoystickException>(() => config.Validate());
+            var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
             Assert.Contains(nameof(config.SemVer), exception.Message);
         }
 
@@ -141,7 +141,7 @@ namespace Joystick.UnitTests.Utils
                 CacheExpirationSeconds = 0,
             };
 
-            var exception = Assert.Throws<JoystickException>(() => config.Validate());
+            var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
             Assert.Contains(nameof(config.CacheExpirationSeconds), exception.Message);
         }
 

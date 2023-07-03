@@ -32,17 +32,17 @@ namespace Joystick.Client.Utils
         {
             if (string.IsNullOrWhiteSpace(config.ApiKey))
             {
-                throw new JoystickException($"{nameof(config.ApiKey)} is required and can't be empty.");
+                throw new JoystickConfigurationException($"{nameof(config.ApiKey)} is required and can't be empty.");
             }
 
             if (!(config.SemVer == null || Regex.IsMatch(config.SemVer, Constants.SemVerPattern)))
             {
-                throw new JoystickException($"{nameof(config.SemVer)} must correspond semantic version pattern.");
+                throw new JoystickConfigurationException($"{nameof(config.SemVer)} must correspond semantic version pattern.");
             }
 
             if (config.CacheExpirationSeconds == 0)
             {
-                throw new JoystickException($"{nameof(config.CacheExpirationSeconds)} must be null or greater than 0.");
+                throw new JoystickConfigurationException($"{nameof(config.CacheExpirationSeconds)} must be null or greater than 0.");
             }
         }
     }
