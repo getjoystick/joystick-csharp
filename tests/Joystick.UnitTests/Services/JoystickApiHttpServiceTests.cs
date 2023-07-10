@@ -54,5 +54,40 @@ namespace Joystick.UnitTests.Services
 
             await Assert.ThrowsAsync<JoystickApiUnknownException>(() => httpService.GetJsonContentsAsync(new[] { "someId" }, Helper.CreateGetContentSettings()));
         }
+
+        [Theory]
+        [InlineData(HttpStatusCode.InternalServerError)]
+        [InlineData(HttpStatusCode.GatewayTimeout)]
+        public async Task UpsertJsonContentAsync_ShouldReturn_JoystickApiServerException(HttpStatusCode statusCode)
+        {
+            var httpClient = Helper.GetMockedHttpClient(statusCode, string.Empty);
+            var httpService = new JoystickApiHttpService(httpClient);
+
+
+            await Assert.ThrowsAsync<JoystickApiServerException>(() => httpService.UpsertJsonContentAsync( "someId", DataHelper.GetUpsertContentRequestBody(), DataHelper.GetJoystickClientConfig() ));
+        }
+
+        [Theory]
+        [InlineData(HttpStatusCode.BadRequest)]
+        [InlineData(HttpStatusCode.Forbidden)]
+        [InlineData(HttpStatusCode.Unauthorized)]
+        public async Task UpsertJsonContentAsync_ShouldReturn_JoystickApiBadRequestException(HttpStatusCode statusCode)
+        {
+            var httpClient = Helper.GetMockedHttpClient(statusCode, string.Empty);
+            var httpService = new JoystickApiHttpService(httpClient);
+
+            await Assert.ThrowsAsync<JoystickApiBadRequestException>(() => httpService.UpsertJsonContentAsync("someId", DataHelper.GetUpsertContentRequestBody(), DataHelper.GetJoystickClientConfig()));
+        }
+
+        [Theory]
+        [InlineData(HttpStatusCode.Continue)]
+        [InlineData(HttpStatusCode.Ambiguous)]
+        public async Task UpsertJsonContentAsync_ShouldReturn_JoystickApiUnknownException(HttpStatusCode statusCode)
+        {
+            var httpClient = Helper.GetMockedHttpClient(statusCode, string.Empty);
+            var httpService = new JoystickApiHttpService(httpClient);
+
+            await Assert.ThrowsAsync<JoystickApiUnknownException>(() => httpService.UpsertJsonContentAsync("someId", DataHelper.GetUpsertContentRequestBody(), DataHelper.GetJoystickClientConfig()));
+        }
     }
 }

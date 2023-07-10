@@ -23,5 +23,10 @@ namespace Joystick.Client.Utils
 
             return new Uri(QueryHelpers.AddQueryString($"{Constants.BaseReadUrl}/v1/combine/", queryParameters));
         }
+
+        internal static Uri ConstructPutContentUrl(string contentId)
+        {
+            return new Uri($"{Constants.BaseWriteUrl}/v1/config/{contentId}");
+        }
     }
 }

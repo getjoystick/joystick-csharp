@@ -11,7 +11,7 @@ namespace Joystick.UnitTests.Helpers
 {
     internal static class Helper
     {
-        internal static HttpClient GetMockedHttpClient(HttpStatusCode statusCode, string content)
+        internal static Mock<HttpMessageHandler> GetMockedHttpMessageHandler(HttpStatusCode statusCode, string content)
         {
             var handlerMock = new Mock<HttpMessageHandler>();
             var response = new HttpResponseMessage
@@ -27,6 +27,13 @@ namespace Joystick.UnitTests.Helpers
                     ItExpr.IsAny<HttpRequestMessage>(),
                     ItExpr.IsAny<CancellationToken>())
                 .ReturnsAsync(response);
+
+            return handlerMock;
+        }
+
+        internal static HttpClient GetMockedHttpClient(HttpStatusCode statusCode, string content)
+        {
+            var handlerMock = GetMockedHttpMessageHandler(statusCode, content);
 
             return new HttpClient(handlerMock.Object);
         }

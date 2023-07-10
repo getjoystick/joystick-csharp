@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Joystick.Client.Core;
 using Joystick.Client.Exceptions;
+using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
 using Joystick.Client.Utils;
-using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 
 namespace Joystick.Client.Services.Http
@@ -35,13 +35,26 @@ namespace Joystick.Client.Services.Http
             return await response.Content.ReadAsStringAsync();
         }
 
+        public async Task UpsertJsonContentAsync(string contentId, UpsertContentRequestBody payloadJson, JoystickClientConfig clientConfig)
+        {
+            var requestUrl = UrlHelper.ConstructPutContentUrl(contentId);
+
+            var request = new HttpRequestMessage(HttpMethod.Put, requestUrl);
+            request.Headers.Add(Constants.ApiKeyHeaderName, clientConfig.ApiKey);
+            request.Content = new StringContent(JsonConvert.SerializeObject(payloadJson), Encoding.UTF8, "application/json");
+
+            await this.SendRequestAsync(request);
+        }
+
         private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage request)
         {
             var response = await this.httpClient.SendAsync(request);
 
             try
             {
+                var responseContent = await response.Content.ReadAsStringAsync();
                 response.EnsureSuccessStatusCode();
+
                 return response;
             }
             catch (Exception e)
