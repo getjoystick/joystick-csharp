@@ -31,7 +31,7 @@ catch (MultipleContentsApiException exception)
 
 var designConfigContent = new DesignConfigs()
 {
-    Thema = DesignThema.Light,
+    Theme = DesignTheme.Light,
     Greeting = "Hi!",
     Scale = 75,
 };
