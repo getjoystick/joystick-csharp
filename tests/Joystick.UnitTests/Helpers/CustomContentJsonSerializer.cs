@@ -15,12 +15,12 @@ namespace Joystick.UnitTests.Helpers
 
         public TOutput Deserialize<TOutput>(string json)
         {
-            return JsonConvert.DeserializeObject<TOutput>(json, converter);
+            return JsonConvert.DeserializeObject<TOutput>(json, this.converter);
         }
 
         public string Serialize<TEntity>(TEntity entity)
         {
-            return JsonConvert.SerializeObject(entity, converter);
+            return JsonConvert.SerializeObject(entity, this.converter);
         }
     }
 }

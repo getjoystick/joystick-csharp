@@ -40,7 +40,7 @@ namespace Joystick.UnitTests.Helpers
 
         internal static GetContentSettings CreateGetContentSettings()
         {
-            return new GetContentSettings(new JoystickClientConfig(), new JoystickContentOptions(), false);
+            return new GetContentSettings(new JoystickContentOptions(), false);
         }
     }
 }
