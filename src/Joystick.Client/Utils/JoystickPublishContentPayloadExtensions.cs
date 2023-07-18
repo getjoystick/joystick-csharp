@@ -1,4 +1,5 @@
-﻿using Joystick.Client.Exceptions;
+﻿using System;
+using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
 using Joystick.Client.Services.Serialization;
@@ -29,7 +30,7 @@ namespace Joystick.Client.Utils
 
         internal static UpsertContentRequestBody MapToUpsertContentRequestBody(this JoystickPublishContentPayload payload, IContentJsonSerializer serializer)
         {
-            var dynamicContentMap = payload.DynamicContentMap ?? new object[0];
+            var dynamicContentMap = payload.DynamicContentMap ?? Array.Empty<object>();
             var body = new UpsertContentRequestBody()
             {
                 Content = JToken.Parse(serializer.Serialize(payload.Content)),
