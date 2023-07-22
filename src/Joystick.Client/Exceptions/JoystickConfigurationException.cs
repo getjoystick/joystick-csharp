@@ -2,7 +2,7 @@
 
 namespace Joystick.Client.Exceptions
 {
-    public class JoystickConfigurationException : JoystickException
+    public class JoystickConfigurationException : JoystickArgumentException
     {
         public JoystickConfigurationException(string message)
             : base(message)

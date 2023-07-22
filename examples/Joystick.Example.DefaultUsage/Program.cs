@@ -1,6 +1,7 @@
 ﻿using Joystick.Client;
 using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
+using Joystick.Example.DefaultUsage;
 
 var config = new JoystickClientConfig()
 {
@@ -10,7 +11,7 @@ var config = new JoystickClientConfig()
 
 var joystickClient = new JoystickClient(config);
 
-var myAppConf = await joystickClient.GetFullContentAsync<string>( "My-app");
+var myAppConf = await joystickClient.GetFullContentAsync<string>("My-app");
 Console.WriteLine(myAppConf.Data);
 
 var contents = await joystickClient.GetContentsAsync<string>(new[] { "my-app", "my-auth-config" });
@@ -20,12 +21,27 @@ foreach (var key in contents.Keys)
 }
 
 try
-{ 
-    var contentsWithError = await joystickClient.GetContentsAsync<string>(new[] {"my-app_771"});
+{
+    var contentsWithError = await joystickClient.GetContentsAsync<string>(new[] { "my-app_771" });
 }
 catch (MultipleContentsApiException exception)
 {
     Console.WriteLine(exception.Message);
 }
+
+var designConfigContent = new DesignConfigs()
+{
+    Theme = DesignTheme.Light,
+    Greeting = "Hi!",
+    Scale = 75,
+};
+
+var payload = new JoystickPublishContentPayload()
+{
+    Content = designConfigContent,
+    Description = "Config to describe web app design",
+};
+
+await joystickClient.PublishContentUpdateAsync("new-config", payload);
 
 Console.ReadKey();

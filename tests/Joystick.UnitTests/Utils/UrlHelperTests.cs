@@ -27,5 +27,16 @@ namespace Joystick.UnitTests.Utils
 
             Assert.Equal(expectedResult, actualResult.Query);
         }
+
+        [Fact]
+        public void ConstructPostContentUrl_Should_HandleCorrectlyAmpersand()
+        {
+            var expectedResult = "https://capi.getjoystick.com/api/v1/config/my-app&";
+            var contentId = "my-app&";
+
+            var actualResult = UrlHelper.ConstructPutContentUrl(contentId);
+
+            Assert.Equal(expectedResult, actualResult.ToString());
+        }
     }
 }
