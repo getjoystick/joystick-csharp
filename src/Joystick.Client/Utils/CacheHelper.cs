@@ -15,7 +15,7 @@ namespace Joystick.Client.Utils
         {
             var stringBuilder = new StringBuilder();
             var stringKey = BuildStringCacheKey(config, isContentSerialized, contentIds);
-            using (SHA256 hash = SHA256Managed.Create())
+            using (SHA256 hash = SHA256.Create())
             {
                 var enc = Encoding.UTF8;
                 var result = hash.ComputeHash(enc.GetBytes(stringKey));
