@@ -7,17 +7,17 @@ namespace Joystick.Client.Models.Api
         public GetContentSettings(JoystickContentOptions contentOptions, bool isContentSerialized)
         {
             this.IsContentSerialized = isContentSerialized;
-            this.ContentOptions = contentOptions;
+            this.Refresh = contentOptions?.Refresh;
         }
 
         public GetContentSettings(JoystickContentOptions contentOptions, Type dataType)
         {
             this.IsContentSerialized = dataType == typeof(string);
-            this.ContentOptions = contentOptions;
+            this.Refresh = contentOptions?.Refresh;
         }
 
         public bool IsContentSerialized { get; set; }
 
-        public JoystickContentOptions ContentOptions { get; set; }
+        public bool? Refresh { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Joystick.Client.Models;
 using Joystick.Client.Models.Api;
+using Joystick.Client.Services.Cache;
 using Moq;
 using Moq.Protected;
 

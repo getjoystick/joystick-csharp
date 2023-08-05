@@ -138,20 +138,36 @@ namespace Joystick.UnitTests.Utils
             var config = new JoystickClientConfig()
             {
                 ApiKey = "key",
-                CacheExpirationSeconds = 0,
+                CacheOptions = new JoystickCacheOptions()
+                {
+                    CacheExpirationSeconds = 0,
+                },
             };
 
             var exception = Assert.Throws<JoystickConfigurationException>(() => config.Validate());
-            Assert.Contains(nameof(config.CacheExpirationSeconds), exception.Message);
+            Assert.Contains(nameof(config.CacheOptions.CacheExpirationSeconds), exception.Message);
         }
 
         [Fact]
-        public void Validate_Should_NoThrowException_WhenCacheExpirationSecondsIsNull()
+        public void Validate_Should_NoThrowException_WhenCacheOptionsIsNull()
         {
             var config = new JoystickClientConfig()
             {
                 ApiKey = "key",
-                CacheExpirationSeconds = null,
+                CacheOptions = null,
+            };
+
+            var exception = Record.Exception(() => config.Validate());
+            Assert.Null(exception);
+        }
+
+        [Fact]
+        public void Validate_Should_NoThrowException_WhenCacheOptionsIsDefault()
+        {
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = "key",
+                CacheOptions = new JoystickCacheOptions(),
             };
 
             var exception = Record.Exception(() => config.Validate());
@@ -164,8 +180,11 @@ namespace Joystick.UnitTests.Utils
             var config = new JoystickClientConfig()
             {
                 ApiKey = "key",
-                CacheExpirationSeconds = 500,
                 SemVer = "1.0.5",
+                CacheOptions = new JoystickCacheOptions()
+                {
+                    CacheExpirationSeconds = 500,
+                },
             };
 
             var exception = Record.Exception(() => config.Validate());

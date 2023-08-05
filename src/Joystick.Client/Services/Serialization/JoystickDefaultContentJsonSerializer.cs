@@ -2,7 +2,7 @@
 
 namespace Joystick.Client.Services.Serialization
 {
-    internal class JoystickDefaultContentJsonSerializer : IContentJsonSerializer
+    internal class JoystickDefaultContentJsonSerializer : IJoystickContentJsonSerializer
     {
         public TOutput Deserialize<TOutput>(string json)
         {

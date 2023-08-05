@@ -25,8 +25,8 @@ namespace Joystick.Client.Models
         public IDictionary<string, object> Params { get; set; }
 
         /// <summary>
-        /// Number of seconds while the cache is valid.
+        /// Options for caching.
         /// </summary>
-        public uint? CacheExpirationSeconds { get; set; }
+        public JoystickCacheOptions CacheOptions { get; set; }
     }
 }

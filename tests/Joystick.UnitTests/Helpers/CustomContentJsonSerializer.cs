@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Joystick.UnitTests.Helpers
 {
-    internal class CustomContentJsonSerializer : IContentJsonSerializer
+    internal class CustomContentJsonSerializer : IJoystickContentJsonSerializer
     {
         private StringEnumConverter converter;
 

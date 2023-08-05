@@ -28,7 +28,7 @@ namespace Joystick.Client.Utils
             }
         }
 
-        internal static UpsertContentRequestBody MapToUpsertContentRequestBody(this JoystickPublishContentPayload payload, IContentJsonSerializer serializer)
+        internal static UpsertContentRequestBody MapToUpsertContentRequestBody(this JoystickPublishContentPayload payload, IJoystickContentJsonSerializer serializer)
         {
             var dynamicContentMap = payload.DynamicContentMap ?? Array.Empty<object>();
             var body = new UpsertContentRequestBody()
