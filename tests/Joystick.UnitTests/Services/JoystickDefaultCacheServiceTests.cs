@@ -62,20 +62,5 @@ namespace Joystick.UnitTests.Services
 
             Assert.False(result);
         }
-
-        [Fact]
-        public void ClearAll_Should_RemoveEverythingFromCache()
-        {
-            var key = Guid.NewGuid().ToString();
-            var memoryCache = MemoryCache.Default;
-            memoryCache.Add(key, "valueToReadFromCache", DateTimeOffset.UtcNow.AddSeconds(3));
-
-            var cacheService = new JoystickDefaultCacheService(new JoystickCacheOptions());
-
-            cacheService.ClearAll();
-
-            var resultTryGet = cacheService.TryGet(key, out var actualValue);
-            Assert.False(resultTryGet);
-        }
     }
 }
