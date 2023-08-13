@@ -32,25 +32,27 @@ namespace Joystick.Client.Utils
         internal static string BuildStringCacheKey(JoystickClientConfig config, bool isContentSerialized, IEnumerable<string> contentIds)
         {
             var stringBuilder = new StringBuilder();
+            stringBuilder.Append('[');
+
             stringBuilder.Append(config.ApiKey);
-            stringBuilder.Append(';');
+            stringBuilder.Append(',');
 
             if (config.Params != null && config.Params.Any())
             {
                 var sortedParams = config.Params.OrderBy(obj => obj.Key, StringComparer.OrdinalIgnoreCase);
 
                 stringBuilder.Append(JsonConvert.SerializeObject(sortedParams));
-                stringBuilder.Append(sortedParams);
             }
 
-            stringBuilder.Append(';');
+            stringBuilder.Append(',');
             stringBuilder.Append(config.SemVer);
-            stringBuilder.Append(';');
+            stringBuilder.Append(',');
             stringBuilder.Append(config.UserId);
-            stringBuilder.Append(';');
+            stringBuilder.Append(',');
             stringBuilder.Append(isContentSerialized);
-            stringBuilder.Append(';');
-            stringBuilder.AppendJoin(';', contentIds.OrderBy(x => x, StringComparer.OrdinalIgnoreCase));
+            stringBuilder.Append(",[");
+            stringBuilder.AppendJoin(',', contentIds.OrderBy(x => x, StringComparer.OrdinalIgnoreCase));
+            stringBuilder.Append("]]");
 
             return stringBuilder.ToString().ToLower();
         }

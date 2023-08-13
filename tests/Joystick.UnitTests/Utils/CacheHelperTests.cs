@@ -157,5 +157,29 @@ namespace Joystick.UnitTests.Utils
 
             Assert.NotEqual(keyV1, keyV2);
         }
+
+        [Fact]
+        public void BuildStringCacheKey_Should_ReturnCorrectString()
+        {
+            var expectedCacheKey =
+                "[testapikey,[{\"key\":\"userprc\",\"value\":[85.08,67.0,20.4]}],1.0.34,testuserid,true,[auth,design]]";
+            var config = new JoystickClientConfig()
+            {
+                ApiKey = "TestApiKey",
+                SemVer = "1.0.34",
+                UserId = "TestUserId",
+                Params = new Dictionary<string, object>()
+                {
+                    { "UserPrc", new[] { 85.08, 67.00, 20.40 } },
+                },
+            };
+
+            var isContentSerialized = true;
+            var contentIds = new[] { "Auth", "Design" };
+
+            var actualCacheKay = CacheHelper.BuildStringCacheKey(config, isContentSerialized, contentIds);
+
+            Assert.Equal(expectedCacheKey, actualCacheKay);
+        }
     }
 }
