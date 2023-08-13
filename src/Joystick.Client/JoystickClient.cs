@@ -119,6 +119,11 @@ namespace Joystick.Client
             return this.httpService.UpsertJsonContentAsync(contentId, requestBody, cancellationToken);
         }
 
+        public void ClearCache()
+        {
+            this.cacheService.ClearAll();
+        }
+
         private async Task<string> GetSerializedFullContentAsync(string contentId, GetContentSettings settings, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (string.IsNullOrWhiteSpace(contentId))

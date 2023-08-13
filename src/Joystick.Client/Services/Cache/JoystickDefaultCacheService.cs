@@ -37,5 +37,11 @@ namespace Joystick.Client.Services.Cache
             value = default(string);
             return false;
         }
+
+        public void ClearAll()
+        {
+            this.cache.Dispose();
+            this.cache = MemoryCache.Default;
+        }
     }
 }
