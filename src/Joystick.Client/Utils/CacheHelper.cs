@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -31,30 +32,28 @@ namespace Joystick.Client.Utils
 
         internal static string BuildStringCacheKey(JoystickClientConfig config, bool isContentSerialized, IEnumerable<string> contentIds)
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append('[');
-
-            stringBuilder.Append(config.ApiKey);
-            stringBuilder.Append(',');
-
+            IEnumerable<KeyValuePair<string, object>> sortedParams;
             if (config.Params != null && config.Params.Any())
             {
-                var sortedParams = config.Params.OrderBy(obj => obj.Key, StringComparer.OrdinalIgnoreCase);
-
-                stringBuilder.Append(JsonConvert.SerializeObject(sortedParams));
+                sortedParams = config.Params.OrderBy(obj => obj.Key, StringComparer.OrdinalIgnoreCase);
+            }
+            else
+            {
+                sortedParams = new Dictionary<string, object>();
             }
 
-            stringBuilder.Append(',');
-            stringBuilder.Append(config.SemVer);
-            stringBuilder.Append(',');
-            stringBuilder.Append(config.UserId);
-            stringBuilder.Append(',');
-            stringBuilder.Append(isContentSerialized);
-            stringBuilder.Append(",[");
-            stringBuilder.AppendJoin(',', contentIds.OrderBy(x => x, StringComparer.OrdinalIgnoreCase));
-            stringBuilder.Append("]]");
+            var contentIdsList = contentIds.ToList();
+            var keyParts = new object[]
+            {
+                config.ApiKey,
+                sortedParams,
+                config.SemVer,
+                config.UserId,
+                contentIdsList.OrderBy(x => x, StringComparer.OrdinalIgnoreCase),
+                isContentSerialized,
+            };
 
-            return stringBuilder.ToString().ToLower();
+            return JsonConvert.SerializeObject(keyParts).ToLower();
         }
     }
 }

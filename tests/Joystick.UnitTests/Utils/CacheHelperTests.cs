@@ -162,7 +162,7 @@ namespace Joystick.UnitTests.Utils
         public void BuildStringCacheKey_Should_ReturnCorrectString()
         {
             var expectedCacheKey =
-                "[testapikey,[{\"key\":\"userprc\",\"value\":[85.08,67.0,20.4]}],1.0.34,testuserid,true,[auth,design]]";
+                "[\"testapikey\",[{\"key\":\"userprc\",\"value\":[85.08,67.0,20.4]}],\"1.0.34\",\"testuserid\",[\"auth\",\"design\"],true]";
             var config = new JoystickClientConfig()
             {
                 ApiKey = "TestApiKey",
