@@ -49,11 +49,11 @@ namespace Joystick.Client.Utils
                 sortedParams,
                 config.SemVer,
                 config.UserId,
-                contentIdsList.OrderBy(x => x, StringComparer.OrdinalIgnoreCase),
+                contentIdsList.Select(x => x.ToLower()).OrderBy(x => x),
                 isContentSerialized,
             };
 
-            return JsonConvert.SerializeObject(keyParts).ToLower();
+            return JsonConvert.SerializeObject(keyParts);
         }
     }
 }

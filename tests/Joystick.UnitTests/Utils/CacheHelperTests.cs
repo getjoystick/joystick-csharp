@@ -8,9 +8,9 @@ namespace Joystick.UnitTests.Utils
     public class CacheHelperTests
     {
         [Fact]
-        public void GenerateCacheKey_Should_BeCaseInsensitive()
+        public void GenerateCacheKey_Should_BeCaseInsensitiveForContentIds()
         {
-            var configWithUpper = new JoystickClientConfig()
+            var config = new JoystickClientConfig()
             {
                 ApiKey = "TestApiKey",
                 SemVer = "1.0.34",
@@ -20,21 +20,12 @@ namespace Joystick.UnitTests.Utils
                     { "UserPrc", 85.08 },
                 },
             };
-            var configWithLower = new JoystickClientConfig()
-            {
-                ApiKey = "testapikey",
-                SemVer = "1.0.34",
-                Params = new Dictionary<string, object>()
-                {
-                    { "country", "UA" },
-                    { "userprc", 85.08 },
-                },
-            };
+
             var contentIdWitUpper = new[] {"Auth", "appDesign"};
             var contentIdWitLower = new[] { "auth", "appdesign" };
 
-            var keyFromUpper = CacheHelper.GenerateCacheKey(configWithUpper, true, contentIdWitUpper);
-            var keyFromLower = CacheHelper.GenerateCacheKey(configWithLower, true, contentIdWitLower);
+            var keyFromUpper = CacheHelper.GenerateCacheKey(config, true, contentIdWitUpper);
+            var keyFromLower = CacheHelper.GenerateCacheKey(config, true, contentIdWitLower);
 
             Assert.Equal(keyFromLower, keyFromUpper);
         }
@@ -162,7 +153,7 @@ namespace Joystick.UnitTests.Utils
         public void BuildStringCacheKey_Should_ReturnCorrectString()
         {
             var expectedCacheKey =
-                "[\"testapikey\",[{\"key\":\"userprc\",\"value\":[85.08,67.0,20.4]}],\"1.0.34\",\"testuserid\",[\"auth\",\"design\"],true]";
+                "[\"TestApiKey\",[{\"Key\":\"UserPrc\",\"Value\":[85.08,67.0,20.4]}],\"1.0.34\",\"TestUserId\",[\"auth\",\"design\"],true]";
             var config = new JoystickClientConfig()
             {
                 ApiKey = "TestApiKey",
