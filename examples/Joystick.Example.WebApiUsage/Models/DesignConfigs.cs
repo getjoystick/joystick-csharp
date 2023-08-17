@@ -1,6 +1,6 @@
-﻿namespace Joystick.Example.DefaultUsage
+﻿namespace Joystick.Example.WebApiUsage.Models
 {
-    internal class DesignConfigs
+    public class DesignConfigs
     {
         public DesignTheme Theme { get; set; }
 
@@ -9,7 +9,7 @@
         public int Scale { get; set; }
     }
 
-    internal enum DesignTheme
+    public enum DesignTheme
     {
         None = 0,
         Dark = 1,

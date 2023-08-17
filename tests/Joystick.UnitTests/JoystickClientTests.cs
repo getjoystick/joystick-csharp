@@ -1,15 +1,8 @@
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Joystick.Client;
 using Joystick.Client.Exceptions;
 using Joystick.Client.Models;
 using Joystick.UnitTests.Helpers;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using Moq.Protected;
 using Xunit;
 
 namespace Joystick.UnitTests
@@ -19,7 +12,9 @@ namespace Joystick.UnitTests
         [Fact]
         public void JoystickClientConstructor_ShouldThrowException_WhenConfigIsNull()
         {
-            Assert.Throws<JoystickArgumentException>(() => new JoystickClient(null));
+#pragma warning disable CS8600
+            Assert.Throws<JoystickArgumentException>(() => new JoystickClient((JoystickClientConfig)null));
+#pragma warning restore CS8600
         }
 
         [Fact]

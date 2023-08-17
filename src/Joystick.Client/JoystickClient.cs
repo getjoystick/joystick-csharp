@@ -13,6 +13,7 @@ using Joystick.Client.Services.Http;
 using Joystick.Client.Services.Serialization;
 using Joystick.Client.Utils;
 using Joystick.Client.Utils.Validators;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -42,6 +43,15 @@ namespace Joystick.Client
             this.httpService = new JoystickApiHttpService(httpClient ?? new HttpClient(), this.config);
             this.contentSerializer = serializer ?? new JoystickDefaultContentJsonSerializer();
             this.cacheService = cacheService ?? new JoystickDefaultCacheService(this.config.CacheOptions);
+        }
+
+        public JoystickClient(
+            IOptions<JoystickClientConfig> configOptions,
+            HttpClient httpClient = null,
+            IJoystickContentJsonSerializer serializer = null,
+            IJoystickCacheService cacheService = null)
+            : this(configOptions?.Value, httpClient, serializer, cacheService)
+        {
         }
 
         public async Task<JoystickFullContent<TData>> GetFullContentAsync<TData>(string contentId, JoystickContentOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
