@@ -1,6 +1,6 @@
 ﻿namespace Joystick.Client.Services.Serialization
 {
-    public interface IContentJsonSerializer
+    public interface IJoystickContentJsonSerializer
     {
         TOutput Deserialize<TOutput>(string json);
 

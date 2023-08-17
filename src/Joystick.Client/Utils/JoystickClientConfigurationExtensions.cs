@@ -40,9 +40,9 @@ namespace Joystick.Client.Utils
                 throw new JoystickConfigurationException($"{nameof(config.SemVer)} must correspond semantic version pattern.");
             }
 
-            if (config.CacheExpirationSeconds == 0)
+            if (config.CacheOptions != null && config.CacheOptions.CacheExpirationSeconds == 0)
             {
-                throw new JoystickConfigurationException($"{nameof(config.CacheExpirationSeconds)} must be null or greater than 0.");
+                throw new JoystickConfigurationException($"{nameof(JoystickCacheOptions.CacheExpirationSeconds)} must be null or greater than 0.");
             }
         }
     }

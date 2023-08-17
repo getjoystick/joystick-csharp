@@ -20,6 +20,10 @@ foreach (var key in contents.Keys)
     Console.WriteLine($"{key}: {contents[key]}");
 }
 
+var joystickClientV2 = new JoystickClient(config);
+
+var contentsSecondAttempt = await joystickClientV2.GetContentsAsync<string>(new[] { "my-app", "my-auth-config" });
+
 try
 {
     var contentsWithError = await joystickClient.GetContentsAsync<string>(new[] { "my-app_771" });

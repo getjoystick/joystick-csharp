@@ -29,5 +29,7 @@ namespace Joystick.Client
         Task<Dictionary<string, TData>> GetContentsAsync<TData>(IEnumerable<string> contentIds, JoystickContentOptions options = null, CancellationToken cancellationToken = default(CancellationToken));
 
         Task PublishContentUpdateAsync(string contentId, JoystickPublishContentPayload payload, CancellationToken cancellationToken = default(CancellationToken));
+
+        void ClearCache();
     }
 }
