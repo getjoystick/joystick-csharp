@@ -11,8 +11,11 @@
     <!--
       SA1600: ElementsMustBeDocumented
 	  SA1200: UsingDirectivesMustBePlacedCorrectly
+	  SA0001: XmlCommentAnalysisDisabled
     -->
     <Rule Id="SA1600" Action="None" />
 	<Rule Id="SA1200" Action="None" />
+	<Rule Id="SA0001" Action="None" />
+
   </Rules>
 </RuleSet>

@@ -21,7 +21,7 @@ namespace Joystick.UnitTests.Utils
                 },
             };
 
-            var contentIdWitUpper = new[] {"Auth", "appDesign"};
+            var contentIdWitUpper = new[] { "Auth", "appDesign" };
             var contentIdWitLower = new[] { "auth", "appdesign" };
 
             var keyFromUpper = CacheHelper.GenerateCacheKey(config, true, contentIdWitUpper);
