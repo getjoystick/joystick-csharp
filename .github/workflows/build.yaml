@@ -1,10 +1,9 @@
 name: Test code
 
-on: [ push ]
+on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -12,14 +11,13 @@ jobs:
       - name: Validate author email
         uses: tfisicaro/commit-email-validation-action@v1
         with:
-          domains: "getjoystick.com;github.com"
+          domains: 'getjoystick.com;github.com'
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: |
             3.1.x
-            5.0.x
             6.0.x
       - name: Install dependencies
         run: dotnet restore
