@@ -7,12 +7,13 @@
       SA1600: ElementsMustBeDocumented
       SA1602: EnumerationItemsMustBeDocumented
       SA1633: FileMustHaveHeader
+      SA0001: XmlCommentAnalysisDisabled
       Documentation related warnings, not applicable to tests.
     -->
     <Rule Id="SA0001" Action="None" />
     <Rule Id="CS1591" Action="None" />
     <Rule Id="SA1600" Action="None" />
     <Rule Id="SA1602" Action="None" />
-    <Rule Id="SA1633" Action="None" />
+    <Rule Id="SA0001" Action="None" />
   </Rules>
 </RuleSet>

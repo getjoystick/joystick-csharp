@@ -5,17 +5,17 @@ namespace Joystick.Client.Exceptions
 {
     public class JoystickApiServerException : JoystickApiHttpException
     {
-        public JoystickApiServerException(string message)
+        internal JoystickApiServerException(string message)
             : base(message)
         {
         }
 
-        public JoystickApiServerException(string message, Exception innerException)
+        internal JoystickApiServerException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        public JoystickApiServerException(HttpStatusCode statusCode, Exception innerException)
+        internal JoystickApiServerException(HttpStatusCode statusCode, Exception innerException)
             : base(statusCode, innerException)
         {
         }

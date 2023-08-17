@@ -21,6 +21,7 @@
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageIcon>packageIcon.jpg</PackageIcon>
 		<RepositoryUrl>https://github.com/getjoystick/joystick-csharp</RepositoryUrl>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Copyright>All rights reserved.</Copyright>
 	</PropertyGroup>
 

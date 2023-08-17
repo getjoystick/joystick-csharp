@@ -4,7 +4,7 @@
     {
         public DesignTheme Theme { get; set; }
 
-        public string Greeting { get; set; }
+        public string? Greeting { get; set; }
 
         public int Scale { get; set; }
     }
