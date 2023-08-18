@@ -12,7 +12,7 @@
 		<Version>$(VersionPrefix)-$(VersionSuffix)</Version>
 		<Authors>Joystick</Authors>
 		<Company>Joystick</Company>
-		<Product>joystick-csharp</Product>
+		<Product>Joystick</Product>
 		<Description>C# client for the GetJoystick Web Api</Description>
 		<PackageProjectUrl>https://github.com/getjoystick/joystick-csharp</PackageProjectUrl>
 		<PackageTags>remote config, dynamic config, joystick, json</PackageTags>
