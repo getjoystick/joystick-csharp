@@ -5,7 +5,7 @@
 		<IsPackable>true</IsPackable>
 		<RootNamespace>Joystick.Client</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageId>joystick-csharp</PackageId>
+		<PackageId>Joystick</PackageId>
 		<Title>Joystick .Net client</Title>
 		<VersionPrefix>1.0.2</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
