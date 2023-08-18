@@ -20,6 +20,6 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Package
-        run: dotnet pack /src/Joystick.Client -c Release --no-build --output nuget
+        run: dotnet pack ./src/Joystick.Client -c Release --no-build --output nuget
       - name: Publish
         run: dotnet nuget push nuget/*.nupkg --api-key ${{ secrets.NUGET_APIKEY }} --source https://api.nuget.org/v3/index.json
