@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="joystick-csharp" Version="1.0.2-alpha" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Joystick.Client\Joystick.Client.csproj" />
   </ItemGroup>
 
 </Project>
