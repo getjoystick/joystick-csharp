@@ -7,7 +7,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>joystick-csharp</PackageId>
 		<Title>Joystick .Net client</Title>
-		<VersionPrefix>1.0.1</VersionPrefix>
+		<VersionPrefix>1.0.2</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Version>$(VersionPrefix)-$(VersionSuffix)</Version>
 		<Authors>Joystick</Authors>
