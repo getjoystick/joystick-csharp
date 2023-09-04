@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Rules for StyleCop.Analyzers" Description="Code analysis rules for Joystick.Net" ToolsVersion="14.0">
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <!--
+      Keep this rule disabled as it would force a header for each file
+      and a copyright.
+       - SA1633: FileMustHaveHeader
+    -->
+    <Rule Id="SA1633" Action="None" />
+
+    <!--
+      SA1600: ElementsMustBeDocumented
+	  SA1200: UsingDirectivesMustBePlacedCorrectly
+	  SA0001: XmlCommentAnalysisDisabled
+    -->
+    <Rule Id="SA1600" Action="None" />
+	<Rule Id="SA1200" Action="None" />
+	<Rule Id="SA0001" Action="None" />
+
+  </Rules>
+</RuleSet>
