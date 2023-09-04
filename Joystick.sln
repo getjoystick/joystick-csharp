@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5FF23401-D2D9-41D2-9042-24C03F920DC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0D0B8B6B-472E-45FE-AC26-1C1AAFDF5A6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_stylecop", "_stylecop", "{B4EE64B2-A86F-4B3C-BB6D-F74737313278}"
+	ProjectSection(SolutionItems) = preProject
+		_stylecop\JoystickRules.ruleset = _stylecop\JoystickRules.ruleset
+		_stylecop\JoysticTestRules.ruleset = _stylecop\JoysticTestRules.ruleset
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joystick.Client", "src\Joystick.Client\Joystick.Client.csproj", "{8B25D8AA-2D1A-438A-907A-AE8C923E8BBA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joystick.UnitTests", "tests\Joystick.UnitTests\Joystick.UnitTests.csproj", "{AE0D6118-762A-4C76-9D23-D60DD3A0CFDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{5AAAE6AD-A21B-4965-BC4C-BF87505B6315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joystick.Example.WebApiUsage", "examples\Joystick.Example.WebApiUsage\Joystick.Example.WebApiUsage.csproj", "{FCC339BF-0719-4580-84A2-C4087EE38F7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B25D8AA-2D1A-438A-907A-AE8C923E8BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B25D8AA-2D1A-438A-907A-AE8C923E8BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B25D8AA-2D1A-438A-907A-AE8C923E8BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B25D8AA-2D1A-438A-907A-AE8C923E8BBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE0D6118-762A-4C76-9D23-D60DD3A0CFDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE0D6118-762A-4C76-9D23-D60DD3A0CFDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE0D6118-762A-4C76-9D23-D60DD3A0CFDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE0D6118-762A-4C76-9D23-D60DD3A0CFDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC339BF-0719-4580-84A2-C4087EE38F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC339BF-0719-4580-84A2-C4087EE38F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC339BF-0719-4580-84A2-C4087EE38F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC339BF-0719-4580-84A2-C4087EE38F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B25D8AA-2D1A-438A-907A-AE8C923E8BBA} = {5FF23401-D2D9-41D2-9042-24C03F920DC9}
+		{AE0D6118-762A-4C76-9D23-D60DD3A0CFDD} = {0D0B8B6B-472E-45FE-AC26-1C1AAFDF5A6F}
+		{FCC339BF-0719-4580-84A2-C4087EE38F7B} = {5AAAE6AD-A21B-4965-BC4C-BF87505B6315}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F636C756-B475-4390-914D-16EB3D61D736}
+	EndGlobalSection
+EndGlobal
