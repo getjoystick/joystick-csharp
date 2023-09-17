@@ -9,19 +9,19 @@ Provided client is supporting .NET Standard 2.1+, .NET Core 3.1+, .NET 5.0+, .NE
 
 ## Installation
 
-Using the [.NET Core command-line interface (CLI) tools][dotnet-core-cli-tools]:
+Using the [.NET Core command-line interface (CLI) tools](https://docs.microsoft.com/en-us/dotnet/core/tools/):
 
 ```sh
 dotnet add package Joystick
 ```
 
-Using the [NuGet Command Line Interface (CLI)][nuget-cli]:
+Using the [NuGet Command Line Interface (CLI)](https://docs.microsoft.com/en-us/nuget/tools/nuget-exe-cli-reference):
 
 ```sh
 nuget install Joystick
 ```
 
-Using the [Package Manager Console][package-manager-console]:
+Using the [Package Manager Console](https://docs.microsoft.com/en-us/nuget/tools/package-manager-console):
 
 ```powershell
 Install-Package Joystick
@@ -122,7 +122,7 @@ You can specify your own cache implementation by implementing the interface [Sdk
 
 #### `Refresh` option
 
-To ignore the existing cache when requesting a config – pass this option as `true`.
+To ignore the existing cache when requesting a config, pass this option as `true`.
 
 ```C#
 var options = new JoystickContentOptions()
