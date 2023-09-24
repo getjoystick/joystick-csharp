@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -99,11 +100,12 @@ namespace Joystick.Client
         public async Task<Dictionary<string, TData>> GetContentsAsync<TData>(IEnumerable<string> contentIds, JoystickContentOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var settings = new GetContentSettings(options, typeof(TData));
-            var serializedContents = await this.GetSerializedFullContentsAsync(contentIds, settings, cancellationToken);
+            var enumerable = contentIds as string[] ?? contentIds.ToArray();
+            var serializedContents = await this.GetSerializedFullContentsAsync(enumerable, settings, cancellationToken);
 
             var contentDataDictionary = this.contentSerializer.Deserialize<Dictionary<string, JoystickBaseContent<TData>>>(serializedContents);
             var result = new Dictionary<string, TData>();
-            foreach (var contentId in contentIds)
+            foreach (var contentId in enumerable)
             {
                 result[contentId] = contentDataDictionary[contentId].Data;
             }
@@ -141,19 +143,32 @@ namespace Joystick.Client
                 throw new JoystickArgumentException($"{nameof(contentId)} can't be empty.");
             }
 
-            var contentsJson = await this.httpService.GetJsonContentsAsync(new[] { contentId }, settings, cancellationToken);
+            var contentIds = new[] { contentId };
+
+            var cacheKay = CacheHelper.GenerateCacheKey(this.config, settings.IsContentSerialized, contentIds);
+            var isContainedInCache = this.cacheService.TryGet(cacheKay, out var contentsJson);
+
+            if (!isContainedInCache || settings.Refresh == true)
+            {
+                contentsJson = await this.httpService.GetJsonContentsAsync(contentIds, settings, cancellationToken);
+            }
 
             var partiallyDeserialized = new Dictionary<string, JToken>(StringComparer.OrdinalIgnoreCase);
             JsonConvert.PopulateObject(contentsJson, partiallyDeserialized);
 
-            JsonContentsValidator.Validate(partiallyDeserialized);
+            if (!isContainedInCache || settings.Refresh == true)
+            {
+                JsonContentsValidator.Validate(partiallyDeserialized);
+                this.cacheService.Set(cacheKay, contentsJson);
+            }
+
             return partiallyDeserialized[contentId].ToString();
         }
 
         private async Task<string> GetSerializedFullContentsAsync(IEnumerable<string> contentIds, GetContentSettings settings, CancellationToken cancellationToken = default(CancellationToken))
         {
             var enumerable = contentIds?.ToList();
-            if (contentIds == null || !enumerable.Any())
+            if (enumerable == null || !enumerable.Any())
             {
                 throw new JoystickArgumentException($"{nameof(contentIds)} can't be empty.");
             }
