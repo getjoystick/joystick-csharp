@@ -168,9 +168,9 @@ namespace Joystick.UnitTests.Utils
             var isContentSerialized = true;
             var contentIds = new[] { "Auth", "Design" };
 
-            var actualCacheKay = CacheHelper.BuildStringCacheKey(config, isContentSerialized, contentIds);
+            var actualCacheKey = CacheHelper.BuildStringCacheKey(config, isContentSerialized, contentIds);
 
-            Assert.Equal(expectedCacheKey, actualCacheKay);
+            Assert.Equal(expectedCacheKey, actualCacheKey);
         }
     }
 }
