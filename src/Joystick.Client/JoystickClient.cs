@@ -145,8 +145,8 @@ namespace Joystick.Client
 
             var contentIds = new[] { contentId };
 
-            var cacheKay = CacheHelper.GenerateCacheKey(this.config, settings.IsContentSerialized, contentIds);
-            var isContainedInCache = this.cacheService.TryGet(cacheKay, out var contentsJson);
+            var cacheKey = CacheHelper.GenerateCacheKey(this.config, settings.IsContentSerialized, contentIds);
+            var isContainedInCache = this.cacheService.TryGet(cacheKey, out var contentsJson);
 
             if (!isContainedInCache || settings.Refresh == true)
             {
@@ -159,7 +159,7 @@ namespace Joystick.Client
             if (!isContainedInCache || settings.Refresh == true)
             {
                 JsonContentsValidator.Validate(partiallyDeserialized);
-                this.cacheService.Set(cacheKay, contentsJson);
+                this.cacheService.Set(cacheKey, contentsJson);
             }
 
             return partiallyDeserialized[contentId].ToString();
@@ -178,9 +178,9 @@ namespace Joystick.Client
                 throw new JoystickArgumentException($"{nameof(contentIds)} can't contain empty value.");
             }
 
-            var cacheKay = CacheHelper.GenerateCacheKey(this.config, settings.IsContentSerialized, enumerable);
+            var cacheKey = CacheHelper.GenerateCacheKey(this.config, settings.IsContentSerialized, enumerable);
 
-            if (this.cacheService.TryGet(cacheKay, out var contentsJson) && settings.Refresh != true)
+            if (this.cacheService.TryGet(cacheKey, out var contentsJson) && settings.Refresh != true)
             {
                 return contentsJson;
             }
@@ -192,7 +192,7 @@ namespace Joystick.Client
 
             JsonContentsValidator.Validate(partiallyDeserialized);
 
-            this.cacheService.Set(cacheKay, contentsJson);
+            this.cacheService.Set(cacheKey, contentsJson);
 
             return contentsJson;
         }
